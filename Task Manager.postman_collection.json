@@ -1,0 +1,1083 @@
+{
+	"info": {
+		"_postman_id": "e91c6d2a-b82b-4f52-96a4-da7f4ba25110",
+		"name": "Task Manager",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "31973937"
+	},
+	"item": [
+		{
+			"name": "Admin",
+			"item": [
+				{
+					"name": "Authentication",
+					"item": [
+						{
+							"name": "Register",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"admin2\",\r\n    \"password\": \"password\",\r\n    \"email\": \"admin2@bla.com\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/api/v1/auth/register",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"auth",
+										"register"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Login",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// Stores the jwt token in a collection variable\r",
+											"var token = pm.response.json().token;\r",
+											"pm.collectionVariables.set(\"token\", token);"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"admin2\",\r\n    \"password\": \"password\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/api/v1/auth/login",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"auth",
+										"login"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"auth": {
+						"type": "noauth"
+					},
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"packages": {},
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"packages": {},
+								"exec": [
+									""
+								]
+							}
+						}
+					]
+				},
+				{
+					"name": "User Management",
+					"item": [
+						{
+							"name": "Create Task",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// Stores the taskId from the response in an environment or global variable\r",
+											"var taskId = pm.response.json().id;\r",
+											"pm.collectionVariables.set(\"taskid\", taskId);"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\":\"finish project\",\r\n    \"description\":\"description\",\r\n    \"dueDate\":\"2024-08-20T07:36:51.595Z\",\r\n    \"status\":\"DONE\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/api/v1/tasks",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"tasks"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create Task",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// Stores the taskId from the response in an environment or global variable\r",
+											"var taskId = pm.response.json().id;\r",
+											"pm.collectionVariables.set(\"taskid\", taskId);"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\":\"finish project\",\r\n    \"description\":\"description\",\r\n    \"dueDate\":\"2024-08-20T07:36:51.595Z\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/api/v1/tasks",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"tasks"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET All Tasks",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseurl}}/api/v1/tasks",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"tasks"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Filter Tasks on Category",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseurl}}/api/v1/tasks/filter?category=OTHER",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"tasks",
+										"filter"
+									],
+									"query": [
+										{
+											"key": "category",
+											"value": "OTHER"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Filter Tasks on Category and Status",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseurl}}/api/v1/tasks/filter?category=OTHER&status=NEW",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"tasks",
+										"filter"
+									],
+									"query": [
+										{
+											"key": "category",
+											"value": "OTHER"
+										},
+										{
+											"key": "status",
+											"value": "NEW"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Task",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"category\":\"OTHER\",\r\n    \"description\": \"another description\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/api/v1/tasks/{{taskid}}",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"tasks",
+										"{{taskid}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Filter Tasks on Category",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseurl}}/api/v1/tasks/filter?category=OTHER",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"tasks",
+										"filter"
+									],
+									"query": [
+										{
+											"key": "category",
+											"value": "OTHER"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET Task",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseurl}}/api/v1/tasks/{{taskid}}",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"tasks",
+										"{{taskid}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Task",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseurl}}/api/v1/tasks/{{taskid}}",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"tasks",
+										"{{taskid}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET All Users",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseurl}}/api/v1/users",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"users"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"auth": {
+						"type": "bearer",
+						"bearer": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "string"
+							}
+						]
+					},
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"packages": {},
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"packages": {},
+								"exec": [
+									""
+								]
+							}
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Authentication",
+					"item": [
+						{
+							"name": "Register",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"user100\",\r\n    \"password\": \"password\",\r\n    \"email\": \"user100@mail.com\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/api/v1/auth/register",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"auth",
+										"register"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Login",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// Stores the jwt token in a collection variable\r",
+											"var token = pm.response.json().token;\r",
+											"pm.collectionVariables.set(\"token\", token);"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"user100\",\r\n    \"password\": \"password\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/api/v1/auth/login",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"auth",
+										"login"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"auth": {
+						"type": "noauth"
+					},
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"packages": {},
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"packages": {},
+								"exec": [
+									""
+								]
+							}
+						}
+					]
+				},
+				{
+					"name": "User Management",
+					"item": [
+						{
+							"name": "Create Task",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// Stores the taskId from the response in an environment or global variable\r",
+											"var taskId = pm.response.json().id;\r",
+											"pm.collectionVariables.set(\"taskid\", taskId);"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\":\"finish project\",\r\n    \"description\":\"description\",\r\n    \"dueDate\":\"2024-08-20T07:36:51.595Z\",\r\n    \"status\":\"IN_PROGRESS\",\r\n    \"category\":\"WORK\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/api/v1/tasks",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"tasks"
+									]
+								},
+								"description": "### Create a New Task\n\nThis endpoint allows you to create a new task.\n\n#### Request Body\n\n- `title` (string, required): The title of the task.\n    \n- `description` (string, required): The description of the task.\n    \n- `dueDate` (string, required): The due date of the task.\n    \n- `status` (string, required): The status of the task.\n    \n\n#### Collection Variable\n\n- `taskId`: This will be populated with the ID of the created task for future reference.\n    \n\n#### Example\n\n``` json\n{\n  \"title\": \"Task Title\",\n  \"description\": \"Task Description\",\n  \"dueDate\": \"2022-12-31\",\n  \"status\": \"In Progress\"\n}\n\n ```"
+							},
+							"response": []
+						},
+						{
+							"name": "Create Task",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\":\"finish project\",\r\n    \"description\":\"description\",\r\n    \"dueDate\":\"2024-08-20T07:36:51.595Z\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/api/v1/tasks",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"tasks"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET All Tasks",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseurl}}/api/v1/tasks",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"tasks"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Filter Tasks on Category",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseurl}}/api/v1/tasks/filter?category=OTHER",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"tasks",
+										"filter"
+									],
+									"query": [
+										{
+											"key": "category",
+											"value": "OTHER"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Filter Tasks on Category and Status",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseurl}}/api/v1/tasks/filter?category=OTHER&status=NEW",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"tasks",
+										"filter"
+									],
+									"query": [
+										{
+											"key": "category",
+											"value": "OTHER"
+										},
+										{
+											"key": "status",
+											"value": "NEW"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Task",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"category\":\"OTHER\",\r\n    \"description\": \"another description\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/api/v1/tasks/{{taskid}}",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"tasks",
+										"{{taskid}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Filter Tasks on Category",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseurl}}/api/v1/tasks/filter?category=OTHER",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"tasks",
+										"filter"
+									],
+									"query": [
+										{
+											"key": "category",
+											"value": "OTHER"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET Task",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseurl}}/api/v1/tasks/{{taskid}}",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"tasks",
+										"{{taskid}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Task",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseurl}}/api/v1/tasks/{{taskid}}",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"tasks",
+										"{{taskid}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET All Tasks",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseurl}}/api/v1/tasks",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"tasks"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET All Users",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseurl}}/api/v1/users",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"users"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"auth": {
+						"type": "bearer",
+						"bearer": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "string"
+							}
+						]
+					},
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"packages": {},
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"packages": {},
+								"exec": [
+									""
+								]
+							}
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Invalid Requests",
+			"item": [
+				{
+					"name": "GET Task",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/api/v1/tasks/153",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"tasks",
+								"153"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Task",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"oldPassword\":\"password\",\r\n    \"title\":\"title\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseurl}}/api/v1/tasks/153",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"tasks",
+								"153"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Task",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/api/v1/tasks/153",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"tasks",
+								"153"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET User",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/api/v1/users/302",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"302"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/api/v1/users/302",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"302"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"oldPassword\":\"password\",\r\n    \"username\":\"newUsername\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseurl}}/api/v1/users/302",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"302"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{token}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "userid",
+			"value": ""
+		},
+		{
+			"key": "baseurl",
+			"value": "http://localhost:8080"
+		},
+		{
+			"key": "taskid",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "token",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
