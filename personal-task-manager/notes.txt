@@ -1,0 +1,58 @@
+-use GitHub
+-why builder
+
+Documentation:
+    The application provides API documentation for developers to understand and test endpoints.
+    A README file explains the setup process, architecture, and usage of the application.
+Testing:
+    Unit Testing:
+    Key service methods and business logic are tested to ensure correct functionality.
+    Integration Testing:
+    REST endpoints are tested to verify proper request handling and response behavior.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    //    private void validateCategory(Category category) {
+    //        if (category != null) {
+    //            for (Category taskCategory : Category.values()) {
+    //                if (taskCategory.name().equals(category.name())) {
+    //                    return;
+    //                }
+    //            }
+    //            throw new InvalidInputException(ErrorMessages.CATEGORY_NOT_FOUND);
+    //        }
+    //    }
+
+    //    private void validateStatus(Status status) {
+    //        if (status != null) {
+    //            for (Status taskStatus : Status.values()) {
+    //                if (taskStatus.name().equals(status.name())) {
+    //                    return;
+    //                }
+    //            }
+    //            throw new InvalidInputException(ErrorMessages.STATUS_NOT_FOUND);
+    //        }
+    //    }
